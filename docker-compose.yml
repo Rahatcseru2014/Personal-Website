@@ -2,6 +2,7 @@ version: "3.3"
 services:
   mc:
     image: nextgenhealthcare/connect
+    restart: always
     environment:
       - DATABASE=postgres
       - DATABASE_URL=jdbc:postgresql://db:5432/mirthdb
@@ -12,12 +13,12 @@ services:
       - KEYSTORE_KEYPASS=docker_keypass
       - VMOPTIONS=-Xmx512m
     ports:
-      - 8080:8080/tcp
-      - 8443:8443/tcp
+      - "8000:80"
     depends_on:
       - db
   db:
     image: postgres
+    restart: always
     environment:
       - POSTGRES_USER=mirthdb
       - POSTGRES_PASSWORD=mirthdb
